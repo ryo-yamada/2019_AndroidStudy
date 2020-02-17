@@ -16,7 +16,7 @@ class RecipeListTestScenario {
     @Rule
     val rule: IntentsTestRule<RecipeListActivity> = IntentsTestRule(RecipeListActivity::class.java, true, true)
 
-    var initializeIdlingResource: IdlingResource? = null
+    private var initializeIdlingResource: IdlingResource? = null
 
     @JvmField
     @Rule
@@ -43,7 +43,6 @@ class RecipeListTestScenario {
 
     @Test
     fun moveToDetail() {
-        val page = RecipeListPage()
-        page.clickToList(0)
+        RecipeListPage.clickToList(0)
     }
 }
