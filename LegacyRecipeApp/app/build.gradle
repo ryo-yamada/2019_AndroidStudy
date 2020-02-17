@@ -39,4 +39,22 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.0'
     implementation 'androidx.test.espresso:espresso-idling-resource:3.1.0'
 
+    // Spoon
+    androidTestImplementation 'com.squareup.spoon:spoon-client:2.0.0-SNAPSHOT'
 }
+
+apply plugin: 'com.jaredsburrows.spoon'
+
+spoon {
+    // for debug output
+    debug = true
+
+    // To grant permissions to Android M >= devices */
+    grantAllPermissions = true
+
+    // Do not fail build if a test fails, let all the tests run and finish. (false by default)
+    ignoreFailures = true
+
+    noAnimations = true
+}
+
