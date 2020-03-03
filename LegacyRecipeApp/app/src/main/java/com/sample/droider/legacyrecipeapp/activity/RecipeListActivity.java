@@ -24,6 +24,7 @@ public class RecipeListActivity extends AppCompatActivity implements ApiRequestT
 
     private ApiRequestTask<List<Recipe>> task;
     private RecipeListRecyclerAdapter adapter;
+    public TestIdlingResource loadingIdlingResource = new TestIdlingResource("IdlingResourceLoading");
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,16 +49,19 @@ public class RecipeListActivity extends AppCompatActivity implements ApiRequestT
 
     @Override
     public void onSuccess(List<Recipe> result) {
+        loadingIdlingResource.setIdle(true);
         showList(result);
     }
 
     @Override
     public void onError(ErrorCode errorCode, String errorMessage, Exception e) {
+        loadingIdlingResource.setIdle(true);
         // TODO: エラー表示
     }
 
     @Override
     public void onCancel() {
+        loadingIdlingResource.setIdle(true);
         // nothing to do
     }
 
@@ -69,6 +73,7 @@ public class RecipeListActivity extends AppCompatActivity implements ApiRequestT
     }
 
     private void fetchRecipeList() {
+        loadingIdlingResource.setIdle(false);
         task = new ApiRequestTask<>(RecipeListRequest.createRequest(), this);
         task.execute(this);
     }

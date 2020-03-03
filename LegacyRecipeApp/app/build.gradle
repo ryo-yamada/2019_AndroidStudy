@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 28
@@ -29,7 +30,31 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.3.10'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.0'
+    implementation 'androidx.test.espresso:espresso-idling-resource:3.1.0'
+
+    // Spoon
+    androidTestImplementation 'com.squareup.spoon:spoon-client:2.0.0-SNAPSHOT'
 }
+
+apply plugin: 'com.jaredsburrows.spoon'
+
+spoon {
+    // for debug output
+    debug = true
+
+    // To grant permissions to Android M >= devices */
+    grantAllPermissions = true
+
+    // Do not fail build if a test fails, let all the tests run and finish. (false by default)
+    ignoreFailures = true
+
+    noAnimations = true
+}
+
